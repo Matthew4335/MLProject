@@ -18,11 +18,8 @@
     <header class="page-header" role="banner">
       <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
       <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
-      <a href="/another-page.md" class="btn">Another Page 1</a>
-      <a href="/another-page.html" class="btn">Another Page 2</a>
       {% if site.github.is_project_page %}
-        <a href="{{site.github.another-page_url}}" class="btn">Another Page 3</a>
-        <a href="href={{ site.baseurl }}/another-page.html" class="btn">Another Page 4</a>
+        <a href="{{ site.baseurl }}/another-page.html" class="btn">Another Page 4</a>
 
       {% endif %}
       {% if site.show_downloads %}
