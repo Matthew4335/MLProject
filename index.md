@@ -1,5 +1,7 @@
 ---
 layout: default
+title: ML Project Title
+description: Matthew Brown
 ---
 
 Text can be **bold**, _italic_, or ML Project.
