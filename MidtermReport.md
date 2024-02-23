@@ -4,5 +4,4 @@ title: NBA Award Prediction
 description: Matthew Brown, Rowan Chatterjee, Wonjin Cho, Clark Cousins
 ---
 
-# Final Report
-
+# Midterm Report
