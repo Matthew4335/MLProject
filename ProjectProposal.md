@@ -6,6 +6,8 @@ description: Matthew Brown, Rowan Chatterjee, Wonjin Cho, Clark Cousins
 
 # Project Proposal
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vJpRFSSnvL4" frameborder="0" allowfullscreen></iframe>
+
 ## Introduction/Background
 
 This project will predict the NBA's annual MVP and DPOY awards, as well as the All-NBA and All-Defensive Team selections. Previous studies have explored the use of machine learning methods to forecast specific game outcomes [1], forecast future NBA rosters [2], and even forecast which college players will perform best in the NBA [3]. However, our project intends to predict end of season awards across the entire NBA through analyzing player statistics and team performances. By doing so, we contribute to the field of sports analytics and machine learning, offering insights into the NBA's prestigious end of season awards.
