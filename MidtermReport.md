@@ -22,11 +22,11 @@ The first methods are team decided to use were StndardScalar for scaling the dat
 
 ### Data Preprocessing
 
-The dataset we are using for our project is a Kaggle dataset, with players stats beginning in 1947, and continuing for every season up to 2024. This data came in the form of several CSV files. We began processing our data by combining the stats for each player across all of these files into a single Pandas dataframe. Additonally, we added the stats for the team the player played for to there row of the dataframe.
+The dataset we are using for our project is a Kaggle dataset, with players stats beginning in 1947, and continuing for every season up to 2024. The dataset contains statistics for 31000 players. This data came in the form of several CSV files, each containing many different features. We began processing our data by combining the stats for each player across all of these files into a single Pandas dataframe. Additonally, we added the stats for the team the player played for to their row of the dataframe.
 
 #### Data Cleaning
 
-Since our team was only concerned with the players selected for the All-Rookie team, we modified our data to only include players in their first year. We also removed any duplicate players (who would appear if they were traded during ther duration of the season) so they would not affect our results. Since rookies are traded less frequently, and a rookie who will be selected for the All-Rookie team is almost never traded, this had little affect on our dataset. To begin working on a model, our team decided to use the 2000-2021 season for training data, and the 2022 season for testing. To begin visualising our data, we ploted several key stats for the players in our training data, shown below.
+Since our team was only concerned with the players selected for the All-Rookie team, we modified our data to only include players in their first year. We also removed any duplicate players (who would appear if they were traded during ther duration of the season) so they would not affect our results. Since rookies are traded less frequently, and a rookie who will be selected for the All-Rookie team is almost never traded, this had little affect on our dataset. To begin working on a model, our team decided to use the 2000-2021 season for training data, and the 2022 season for testing. To begin visualising our data, we plotted several key stats for the players in our training data, shown below. Using this visual data, our team was able to manually select the features that seemed most relevant for deciding which player would make the All-Rookie team.
 
 
 ![Data](UnscaledStats.jpg)
@@ -39,26 +39,31 @@ Before performing PCA, we scaled our data using the StandardScalar library in sk
 
 #### PCA
 
-After scaling the training and testing data, we used the PCA class in sklearn to reduce the dimensionality of our data. Using PCA, we obtained the 4 principle components that would retain 95% of the variance in our data. The first 3 principle components are shown below.
+After scaling the training and testing data, we used the PCA (Principle Component Analysis) class in sklearn to reduce the dimensionality of our data. Using PCA, we obtained the 4 principle components that would retain 95% of the variance in our data. The first 3 principle components are shown below. As can be seen in the plot, there is a large amount of separation between most of the players selected for the All-Rookie team and those not selected.
 
 ![Data](PCAData.jpg)
 
 ### Logistic Regression Model
 
-In order to make predictions, our team decided to use a logistic regression model for classification. We used the LogisticRegression class in sklearn to perform the classification. The model first splits the training data (2001 - 2021 seasons) into training and test data, with 20% of the data being used for testing. The data is inherently unbalanced between players selected for the All-Rookie team and those not selected since only 10 players are selected per season. To counter this, we added weights to the classes so the model would favor the All-Rookie class. We ran the model several times, and obtained the best results with weights of 1 for the not selected class and 3 for the All-Rookie class.
+In order to make predictions, our team decided to use a logistic regression model for classification. We used the LogisticRegression class in sklearn to perform the classification. The model first splits the training data (2001 - 2021 seasons) into training and test data, with 30% of the data being used for testing. The data is inherently unbalanced between players selected for the All-Rookie team and those not selected since only 10 players are selected per season. To counter this, we added weights to the classes so the model would favor the All-Rookie class. We ran the model several times, and obtained the best results with weights of 1 for the not selected class and 3 for the All-Rookie class. In the model, 0 is used to represent a player not selected, and 1 is used for players that are selected.
 
 ## Results
 
-Accuracy: 0.97
+Below is a table showing several measurements of our model's performance. Our model using logistic regression performed much better than we initially expected. Most notable of these metrix is the precision for the class 1. This means that 86% of players predicted to make the All-Rookie team did make the team. Additionally, based on the recall for class 1 the model correctly identifies 97% of All-Rookie players. Note that these are the results for a model trained on a random split of the data into a training set and a testing set, and they can change slightly depending on how the data is divided.
 
+Accuracy: 0.97
 |    | Precision | Recall | F1-score | Support |
 |----|-----------|--------|----------|---------|
-| 0  |   0.99    |  0.98  |   0.99   |   162   |
-| 1  |   0.87    |  0.95  |   0.91   |    21   |
+| 0  |   0.99    |  0.98  |   0.99   |   242   |
+| 1  |   0.86    |  0.97  |   0.91   |    32   |
+
+The below figure shows the confusion matrix for the test data. Of the 274 players in the testing data, there were 242 players who were not selected for the All-Rookie team and 32 players who were. The logistic regression model correctly identified 11 All-Rookies, and was not able to identify 1 All-Rookie. Then model correctly identified 237 of the non-All-Rookie players, and misidentified 5 non-All-Rookie players as All-Rookie.
 
 <div style="text-align:center;">
-    <img src="ConfusionMatrix.png" alt="Confusion Matrix">
+    <img src="ConfusionMatrix.jpg" alt="Confusion Matrix">
 </div>
+
+The goal of our model was to be able to accurately predict the All-Rookie players for any given season, based on their current stats. After training our model, we used it to calculate the probabilites of each player for the 2022 season to make the All-Rookie team and then output the 10 most likely players. We used the model in this way because it is gauranteed that there will be 10 All-Rookie players each season. Below are the results for the logistic regression model.
 
 2022 Season All-Rookie Team: Cade Cunningham, Evan Mobley, Franz Wagner, Jalen Green, Scottie Barnes, Ayo Dosunmu, Bones Hyland, Chris Duarte, Herbert Jones, Josh Giddey
 
@@ -67,6 +72,8 @@ Accuracy: 0.97
 Incorrect Positive Predictions: Alperen Şengün, Davion Mitchell
 
 Incorrect Negative Predictions: Bones Hyland, Chris Duarte
+
+Based on these results, the model was able to correctly identify 8 out of the 10 All-Rookies from the 2022 season.
 
 
 ## Gantt Chart
@@ -78,8 +85,8 @@ Incorrect Negative Predictions: Bones Hyland, Chris Duarte
 | Name              | Contributions                                   |
 |:------------------|:------------------------------------------------|
 | Matthew Brown     | Model Design and Selection <br/> Data Preprocessing <br/> Feature Reduction <br/> Data Visualization <br/> Model Implementation<br/> Proposal |
-| Rowan Chatterjee  | Model Design and Selection <br/> Data Preprocessing <br/> Data Visualization       |
-| Wonjin Cho        | Model Design and Selection <br/> Data Preprocessing <br/>  Feature Reduction <br/>|
+| Rowan Chatterjee  | Model Design and Selection <br/> Data Preprocessing <br/> Data Visualization  <br/> Proposal     |
+| Wonjin Cho        | Model Design and Selection <br/> Data Preprocessing <br/>  Feature Reduction |
 | Clark Cousins     | Model Design and Selection <br/> Model Implementation                     |
 
 ## References
