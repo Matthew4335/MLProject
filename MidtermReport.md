@@ -29,3 +29,16 @@ By leveraging ML algorithms to analyze team and player statistics, we aim to dev
 ### PCA
 
 ![Data](PCAData.jpg)
+
+## Gantt Chart
+### NBA Award Predition | Project Timeline
+![Gantt Chart](GanttChartImage2.png)
+
+## Contribution Table
+
+| Name              | Contributions                                   |
+|:------------------|:------------------------------------------------|
+| Matthew Brown     | Model Design and Selection <br/> Data Preprocessing <br/> Feature Reduction <br/> Data Visualization <br/> Proposal |
+| Rowan Chatterjee  | Model Design and Selection <br/> Data Preprocessing <br/> Data Visualization       |
+| Wonjin Cho        | Model Design and Selection <br/> Data Preprocessing <br/>  Feature Reduction <br/>|
+| Clark Cousins     | Model Design and Selection <br/> Model Implementation                     |

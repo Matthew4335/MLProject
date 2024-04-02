@@ -50,7 +50,7 @@ Our project goals consist of the following: Achieve an accuracy score of over 80
 
 ## Gantt Chart
 ### NBA Award Predition | Project Timeline
-![Gantt Chart](GanttChartImage.png)
+![Gantt Chart](GanttChartImage1.png)
 
 ## Contribution Table
 
