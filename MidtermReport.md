@@ -18,7 +18,7 @@ By leveraging ML algorithms to analyze team and player statistics, we aim to dev
 
 ## Methods
 
-The first methods are team decided to use were PCA for data preprocessing and and a Logistic Regression model for predictions.
+The first methods are team decided to use were StndardScalar for scaling the data, PCA for data preprocessing, and and a Logistic Regression model for predictions.
 
 ### Data Preprocessing
 
@@ -33,7 +33,7 @@ Since our team was only concerned with the players selected for the All-Rookie t
 
 #### Standard Scalar
 
-Before performing PCA, we scaled our data using the StandardScalar library in sklearn to take into account the difference in player performance across different seasons. The scaled dats is shown in the plot below. 
+Before performing PCA, we scaled our data using the StandardScalar library in sklearn to take into account the difference in player performance across different seasons. The averages for certain stats like points per game have gone up through the years, so in order to account for this we normalized the data. The scaled data is shown in the plot below. 
 
 ![Data](ScaledStats.jpg)
 
