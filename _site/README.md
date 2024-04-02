@@ -5,3 +5,6 @@
 
 # Slide for the Presentation:
 - https://docs.google.com/presentation/d/1aJiS64Wb6Y2dbrpkw2r6qGFAy5d1XRCmlIdCo-IGe70/edit?usp=sharing
+
+# Video Link for the Presentation:
+- https://youtu.be/vJpRFSSnvL4
