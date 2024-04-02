@@ -15,3 +15,17 @@ In order to achieve this, we will need a dataset of player and team stats from p
 ## Problem Definition
 Our project's primary problem is the subjective nature of NBA award selections and team nominations. Despite the availability of player performance data, the current selection process involves human judgment, which can overlook the statistical contributions of players throughout the season. This subjectivity leads to inconsistencies in award selections.
 By leveraging ML algorithms to analyze team and player statistics, we aim to develop a model that can identify patterns that correlate with award selections and team nominations to solve this problem. This approach provides a transparent method for award/team selection.
+
+## Data Preprocessing
+
+### Data Cleaning
+
+![Data](UnscaledStats.jpg)
+
+### Standard Scalar
+
+![Data](ScaledStats.jpg)
+
+### PCA
+
+![Data](PCAData.jpg)
