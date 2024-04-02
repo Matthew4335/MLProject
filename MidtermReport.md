@@ -52,6 +52,7 @@ In order to make predictions, our team decided to use a logistic regression mode
 Below is a table showing several measurements of our model's performance. Our model using logistic regression performed much better than we initially expected. Most notable of these metrix is the precision for the class 1. This means that 86% of players predicted to make the All-Rookie team did make the team. Additionally, based on the recall for class 1 the model correctly identifies 97% of All-Rookie players. Note that these are the results for a model trained on a random split of the data into a training set and a testing set, and they can change slightly depending on how the data is divided.
 
 Accuracy: 0.97
+
 |    | Precision | Recall | F1-score | Support |
 |----|-----------|--------|----------|---------|
 | 0  |   0.99    |  0.98  |   0.99   |   242   |
