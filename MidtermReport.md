@@ -18,7 +18,7 @@ By leveraging ML algorithms to analyze team and player statistics, we aim to dev
 
 ## Methods
 
-The first methods are team decided to use was PCA for data preprocessing and and a Logistic Regression model for predictions.
+The first methods are team decided to use were PCA for data preprocessing and and a Logistic Regression model for predictions.
 
 ### Data Preprocessing
 
@@ -26,21 +26,28 @@ The dataset we are using for our project is a Kaggle dataset, with players stats
 
 #### Data Cleaning
 
-Since our team was only concerned with the players selected for the All-Rookie team, we modified our data to only include players in their first year. We also removed any duplicate players (who would appear if they were traded during ther duration of the season) so they would not affect our results. Since rookies are traded less frequently, and a rookie who will be selected for the All-Rookie team is almost never traded, this had little affect on our dataset. To begin working on a model, our team decided to use the 2000-2021 season for training data, and the 2022 season for testing.
+Since our team was only concerned with the players selected for the All-Rookie team, we modified our data to only include players in their first year. We also removed any duplicate players (who would appear if they were traded during ther duration of the season) so they would not affect our results. Since rookies are traded less frequently, and a rookie who will be selected for the All-Rookie team is almost never traded, this had little affect on our dataset. To begin working on a model, our team decided to use the 2000-2021 season for training data, and the 2022 season for testing. To begin visualising our data, we ploted several key stats for the players in our training data, shown below.
+
 
 ![Data](UnscaledStats.jpg)
 
 #### Standard Scalar
 
+Before performing PCA, we scaled our data using the StandardScalar library in sklearn to take into account the difference in player performance across different seasons. The scaled dats is shown in the plot below. 
 
 ![Data](ScaledStats.jpg)
 
 #### PCA
 
+After scaling the training and testing data, we used the PCA class in sklearn to reduce the dimensionality of our data. Using PCA, we obtained the 4 principle components that would retain 95% of the variance in our data. The first 3 principle components are shown below.
+
 ![Data](PCAData.jpg)
 
 ### Logistic Regression Model
 
+In order to make predictions, our team decided to use a logistic regression model for classification. We used the LogisticRegression class in sklearn to perform the classification. The model first splits the training data (2001 - 2021 seasons) into training and test data, with 20% of the data being used for testing. The data is inherently unbalanced between players selected for the All-Rookie team and those not selected since only 10 players are selected per season. To counter this, we added weights to the classes so the model would favor the All-Rookie class. We ran the model several times, and obtained the best results with weights of 1 for the not selected class and 3 for the All-Rookie class.
+
+## Results
 
 Accuracy: 0.97
 
@@ -53,7 +60,14 @@ Accuracy: 0.97
     <img src="ConfusionMatrix.png" alt="Confusion Matrix">
 </div>
 
-## Results
+2022 Season All-Rookie Team: Cade Cunningham, Evan Mobley, Franz Wagner, Jalen Green, Scottie Barnes, Ayo Dosunmu, Bones Hyland, Chris Duarte, Herbert Jones, Josh Giddey
+
+2022 Season Predicted All-Rookie Team: Evan Mobley, Cade Cunningham, Scottie Barnes, Franz Wagner, Herbert Jones, Alperen Şengün, Jalen Green, Davion Mitchell, Josh Giddey, Ayo Dosunmu
+
+Incorrect Positive Predictions: Alperen Şengün, Davion Mitchell
+
+Incorrect Negative Predictions: Bones Hyland, Chris Duarte
+
 
 ## Gantt Chart
 ### NBA Award Predition | Project Timeline
@@ -63,7 +77,7 @@ Accuracy: 0.97
 
 | Name              | Contributions                                   |
 |:------------------|:------------------------------------------------|
-| Matthew Brown     | Model Design and Selection <br/> Data Preprocessing <br/> Feature Reduction <br/> Data Visualization <br/> Model <br/> Proposal |
+| Matthew Brown     | Model Design and Selection <br/> Data Preprocessing <br/> Feature Reduction <br/> Data Visualization <br/> Model Implementation<br/> Proposal |
 | Rowan Chatterjee  | Model Design and Selection <br/> Data Preprocessing <br/> Data Visualization       |
 | Wonjin Cho        | Model Design and Selection <br/> Data Preprocessing <br/>  Feature Reduction <br/>|
 | Clark Cousins     | Model Design and Selection <br/> Model Implementation                     |
