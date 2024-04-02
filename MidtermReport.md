@@ -42,13 +42,12 @@ Since our team was only concerned with the players selected for the All-Rookie t
 ### Logistic Regression Model
 
 
+Accuracy: 0.97
 
-
-Accuracy: 0.9781420765027322
-    precision    recall  f1-score   support
-
-0       0.99      0.98      0.99       162
-1       0.87      0.95      0.91        21
+|    | Precision | Recall | F1-score | Support |
+|----|-----------|--------|----------|---------|
+| 0  |   0.99    |  0.98  |   0.99   |   162   |
+| 1  |   0.87    |  0.95  |   0.91   |    21   |
 
 <div style="text-align:center;">
     <img src="ConfusionMatrix.png" alt="Confusion Matrix">
