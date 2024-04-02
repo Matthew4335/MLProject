@@ -30,6 +30,10 @@ By leveraging ML algorithms to analyze team and player statistics, we aim to dev
 
 ![Data](PCAData.jpg)
 
+## Model
+
+![Data](ConfusionMatrix.png.jpg)
+
 ## Gantt Chart
 ### NBA Award Predition | Project Timeline
 ![Gantt Chart](GanttChartImage2.png)
