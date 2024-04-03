@@ -8,3 +8,7 @@
 
 # Video Link for the Presentation:
 - https://youtu.be/vJpRFSSnvL4
+
+- #Directories and Files
+- /ProjectCode/ - Directory containing all code for the project, as well as the dataset CSV files
+- /ProjectCode/projectcode-checkpoint.ipynb - Jupyter Notebook containing all project code as of midterm checkpoint
