@@ -18,11 +18,11 @@ By leveraging ML algorithms to analyze team and player statistics, we aim to dev
 
 ## Methods
 
-The first methods are team decided to use were StndardScalar for scaling the data, PCA for data preprocessing, and and a Logistic Regression model for predictions.
+The first methods our team decided to use were StandardScalar for scaling the data, PCA for data preprocessing, and a Logistic Regression model for predictions.
 
 ### Data Preprocessing
 
-The dataset we are using for our project is a Kaggle dataset, with players stats beginning in 1947, and continuing for every season up to 2024. The dataset contains statistics for 31000 players. This data came in the form of several CSV files, each containing many different features. We began processing our data by combining the stats for each player across all of these files into a single Pandas dataframe. Additonally, we added the stats for the team the player played for to their row of the dataframe.
+The dataset we are using for our project is a Kaggle dataset, with player stats beginning in 1947, and continuing for every season up to 2024. The dataset contains statistics for 31000 players. This data came in the form of several CSV files, each containing many different features. We began processing our data by combining the stats for each player across all of these files into a single Pandas dataframe. Additionally, we added the stats for the team the player played on to their row of the dataframe.
 
 #### Data Cleaning
 
@@ -49,7 +49,7 @@ In order to make predictions, our team decided to use a logistic regression mode
 
 ## Results
 
-Below is a table showing several measurements of our model's performance. Our model using logistic regression performed much better than we initially expected. Most notable of these metrix is the precision for the class 1. This means that 86% of players predicted to make the All-Rookie team did make the team. Additionally, based on the recall for class 1 the model correctly identifies 97% of All-Rookie players. Note that these are the results for a model trained on a random split of the data into a training set and a testing set, and they can change slightly depending on how the data is divided.
+Below is a table showing several measurements of our model's performance. Our model using logistic regression performed much better than we initially expected. Most notable of these metrics is the 0.86 precision for the class 1. This means that 86% of players predicted to make the All-Rookie team did make the team. Additionally, based on the recall for class 1 the model correctly identifies 97% of All-Rookie players. Note that these are the results for a model trained on a random split of the data into a training set and a testing set, and they can change slightly depending on how the data is divided.
 
 Accuracy: 0.97
 
@@ -58,7 +58,7 @@ Accuracy: 0.97
 | 0  |   0.99    |  0.98  |   0.99   |   242   |
 | 1  |   0.86    |  0.97  |   0.91   |    32   |
 
-The below figure shows the confusion matrix for the test data. Of the 274 players in the testing data, there were 242 players who were not selected for the All-Rookie team and 32 players who were. The logistic regression model correctly identified 11 All-Rookies, and was not able to identify 1 All-Rookie. Then model correctly identified 237 of the non-All-Rookie players, and misidentified 5 non-All-Rookie players as All-Rookie.
+The below figure shows the confusion matrix for predictions made on the test data. Of the 274 players in the testing data, there were 242 players who were not selected for the All-Rookie team and 32 players who were. The logistic regression model correctly identified 11 All-Rookies, and was not able to identify 1 All-Rookie. Then model correctly identified 237 of the non-All-Rookie players, and misidentified 5 non-All-Rookie players as All-Rookie.
 
 <div style="text-align:center;">
     <img src="ConfusionMatrix.jpg" alt="Confusion Matrix">
