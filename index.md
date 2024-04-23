@@ -52,9 +52,9 @@ In order to make predictions, our team decided to use a logistic regression mode
 
 #### KNN
 
-One problem we came across while training the model is determining an optimal value for $k$. To solve this problem, we trained several models on $k$'s ranging from 1 to 39, then picked the $k$ that resulted in the most accurate model. We found that $k$ = 29 was optimal based on raw accuracy, but $k$=19 produced a better F1 score. We opted to use $k$=19 because our model should be able to classify all rookies. Below is a graph comparing cross-validated F1 Scores across various $k$-values. Even with fewer neighbors, the model performs well.
+One problem we came across while training the model is determining an optimal value for k. To solve this problem, we trained several models on k's ranging from 1 to 39, then picked the k that resulted in the most accurate model. We found that k = 29 was optimal based on raw accuracy, but k=19 produced a better F1 score. We opted to use k=19 because our model should be able to classify all rookies. Below is a graph comparing cross-validated F1 Scores across various k-values. Even with fewer neighbors, the model performs well.
 
-![Data](OptimumKValue.jpg)
+![Data](OptimalKValue.jpg)
 
 
 #### GMM
