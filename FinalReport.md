@@ -4,7 +4,7 @@ title: NBA Award Prediction
 description: Matthew Brown, Rowan Chatterjee, Wonjin Cho, Clark Cousins
 ---
 
-# Midterm Report
+# Final Report
 
 ## Introduction/Background
 
@@ -18,7 +18,7 @@ By leveraging ML algorithms to analyze team and player statistics, we aim to dev
 
 ## Methods
 
-The first methods our team decided to use were StandardScalar for scaling the data, PCA for data preprocessing, and a Logistic Regression model for predictions.
+The methods our team decided to use on processing data were StandardScalar for scaling the data, PCA for data preprocessing. Then, our team decided to use a Logistic Regression model, KNN model, NN model, and GMM model for predictions.
 
 ### Data Preprocessing
 
@@ -49,6 +49,15 @@ After scaling the training and testing data, we used the PCA (Principle Componen
 #### Logistic Regression Model
 
 In order to make predictions, our team decided to use a logistic regression model for classification. We used the LogisticRegression class in sklearn to perform the classification. The model first splits the training data (2001 - 2021 seasons) into training and test data, with 30% of the data being used for testing. The data is inherently unbalanced between players selected for the All-Rookie team and those not selected since only 10 players are selected per season. To counter this, we added weights to the classes so the model would favor the All-Rookie class. We ran the model several times, and obtained the best results with weights of 1 for the not selected class and 3 for the All-Rookie class. In the model, 0 is used to represent a player not selected, and 1 is used for players that are selected.
+
+#### KNN
+
+
+#### GMM
+
+
+#### NN
+
 
 ## Results
 
