@@ -12,4 +12,4 @@
 
 # Directories and Files
 - /ProjectCode/ - Directory containing all code for the project, as well as the dataset CSV files
-- /ProjectCode/projectcode-checkpoint.ipynb - Jupyter Notebook containing all final project code
+- /ProjectCode/projectcode-final.ipynb - Jupyter Notebook containing all final project code
