@@ -71,7 +71,7 @@ While we were building our other models, we became curious about how an unsuperv
 ## Results
 
 ### Logistic Regression
-Below is a table showing several measurements of our model's performance. Our model using logistic regression performed much better than we initially expected. Most notable of these metrics is the 0.86 precision for the class 1. This means that 86% of players predicted to make the All-Rookie team did make the team. Additionally, based on the recall for class 1 the model correctly identifies 97% of All-Rookie players. Note that these are the results for a model trained on a random split of the data into a training set and a testing set, and they can change slightly depending on how the data is divided.
+Below is a table showing several measurements of our model's performance. Our model using logistic regression performed much better than we initially expected. The most notable of these metrics is the 0.86 precision for class 1. This means that 86% of players predicted to make the All-Rookie team did make the team. Additionally, based on the recall for class 1, the model correctly identifies 97% of All-Rookie players. Note that these are the results for a model trained on a random split of the data into a training set and a testing set, and they can change slightly depending on how the data is divided.
 
 Accuracy: 97%
 
@@ -99,7 +99,7 @@ Incorrect Negative Predictions: Bones Hyland, Chris Duarte
 Based on these results, the model was able to correctly identify 8 out of the 10 All-Rookies from the 2022 season.
 
 ### K-Nearest Neighbors
-Below we have a table showing performance measurements for our KNN model. Our KNN model performed better than expected! A precision score of 97% for class 1 means 97% of the players the model said would make the All-Rookie team made it, which is a better mark than our Logisitic Regression Model. However, KNN struggled significantly with recall compared to LR, with only 71%. 
+Below we have a table showing performance measurements for our KNN model. Our KNN model performed better than expected! A precision score of 97% for class 1 means 97% of the players the model said would make the All-Rookie team made it, which is a better mark than our Logistic Regression Model. However, KNN struggled significantly with recall compared to LR, with only 71%. 
 
 Accuracy: 95.8%
 
@@ -129,9 +129,9 @@ After training our model, we used it to calculate the probabilities of each 2022
 |   Josh Giddey   |      0.8750     |
 |   Ayo Dosunmu   |      0.6875      |
 
-Again, our model correctly idenitified 8 of the 10 All-Rookies from 2022, and actually predicted the same set of 10 players as our Logistic Regression Model.
+Again, our model correctly identified 8 of the 10 All-Rookies from 2022 and actually predicted the same set of 10 players as our Logistic Regression Model.
 
-Incorrect Positive Predicitons: Alperen Şengün, Davion Mitchell
+Incorrect Positive Predictions: Alperen Şengün, Davion Mitchell
 
 Incorrect Negative Predictions: Bones Hyland, Chris Duarte
 
@@ -145,7 +145,7 @@ Accuracy: 94.7%, Loss: 10.2%
 | 0  |   0.96    |  0.99 |   0.98   |   268   |
 | 1  |   0.91    |  0.76  |   0.83   |    42   |
 
-We also generated the confusion matrix for the NN, and have displayed it below. Over the same data set of 310 players, our NN correctly classified 265 of the 268 players that did not make All Rookie, incorrectly predicting 3 players that did not make all-Rookie to do so. It correctly labelled 32 players as All-Rookie members, but labelled 10 players that did not make the All-Rookie team to do so.
+We also generated the confusion matrix for the NN, and have displayed it below. Over the same data set of 310 players, our NN correctly classified 265 of the 268 players that did not make All Rookie, incorrectly predicting 3 players that did not make all-Rookie to do so. It correctly labeled 32 players as All-Rookie members but labeled 10 players that did not make the All-Rookie team to do so.
 
 <div style="text-align:center;">
     <img src="ConfusionMatrixNN.jpg" alt="Confusion Matrix">
@@ -166,27 +166,27 @@ We used a similar methodology as LR and KNN to generate the 10 most likely membe
 |   Davion Mitchell   |      0.964     |
 |   Ayo Dosunmu   |      0.899      |
 
-Our model predicted the same set of rookies as our Logisitic Regression and K-Nearest Neighbor models, which means it scored an 80% for accuracy for this predicion. It presented the team in a slightly different ordering of probabilities compared the the previous models. 
+Our model predicted the same set of rookies as our Logistic Regression and K-Nearest Neighbor models, which means it scored an 80% for accuracy for this prediction. It presented the team in a slightly different ordering of probabilities compared the the previous models. 
 
-Incorrect Positive Predicitons: Alperen Şengün, Davion Mitchell
+Incorrect Positive Predictions: Alperen Şengün, Davion Mitchell
 
 Incorrect Negative Predictions: Bones Hyland, Chris Duarte
 
 ## Gaussian Mixture Model
-GMM performed significantly worse than all three supervised models, posting an accuracy of 75.8% on the testing data. For that reason, we ended up not using it to predict 2022 rookies. Below is the coinfusion matrix for the GMM clustering, and we can see that the model struggled significantly with players that did not win All-Rookie honors. 
+GMM performed significantly worse than all three supervised models, posting an accuracy of 75.8% on the testing data. For that reason, we ended up not using it to predict 2022 rookies. Below is the confusion matrix for the GMM clustering, and we can see that the model struggled significantly with players that did not win All-Rookie honors. 
 
 <div style="text-align:center;">
     <img src="ConfusionMatrixGMM.jpg" alt="Confusion Matrix">
 </div>
 
-Below are the clusters the model generated. In blue are the players it predicted to not make All-Rookie, and in red are the palyers it did. It appears that GMM has a hard time capturing exactly what makes a rookie as impactful as an All-Rookie member, and will particularly struggle with borderline players. 
+Below are the clusters the model generated. In blue are the players it predicted to not make All-Rookie, and in red are the players it did. It appears that GMM has a hard time capturing exactly what makes a rookie as impactful as an All-Rookie member, and will particularly struggle with borderline players. 
 
 <div style="text-align:center;">
     <img src="GMMClusters.png" alt="Confusion Matrix">
 </div>
 
 ## Discussion
-Our models performed rather well. When we set out on this project, we set goals of an Accuracy score greater than 80%, Precision and Recall both greather than 75%, and an F1 Score greater than 75%. All of our models achieved that mark, reaching 80% accuracy for all 2022 All-Rookie predictions. Of the three models we trained to predict results, Logistic Regression performed the best, putting up the highest F1-Score while predicting awards of 90% and a recall of 93%. The Neural Network performed the worst, posting an F1-Score of 83% and a recall of 76%. KNN sat in the middle, with an F1 Score of 85% and a recall of 74%. 
+Our models performed rather well. When we set out on this project, we set goals of an Accuracy score greater than 80%, Precision and Recall both greater than 75%, and an F1 Score greater than 75%. All of our models achieved that mark, reaching 80% accuracy for all 2022 All-Rookie predictions. Of the three models we trained to predict results, Logistic Regression performed the best, putting up the highest F1-Score while predicting awards of 90% and a recall of 93%. The Neural Network performed the worst, posting an F1-Score of 83% and a recall of 76%. KNN sat in the middle, with an F1 Score of 85% and a recall of 74%. 
 
 Logistic Regression likely succeeded due to a variety of reasons. The weightings given to the data before training allowed the model to navigate a data set with relatively few All-Rookie winners. Other models were not able to capture this. Another reason is the more linear nature of the relationship between statistics and rookie awards. As a trend, we found that players who score more points while playing more games ended up being awarded with All-Rookie honors. It's likely that LR handled that relationship very well. As a whole, all models struggled on picking "borderline" players. 
 
