@@ -6,6 +6,8 @@ description: Matthew Brown, Rowan Chatterjee, Wonjin Cho, Clark Cousins
 
 # Final Report
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/c9MrLH_-7IE" frameborder="0" allowfullscreen></iframe>
+
 ## Introduction/Background
 
 This project will predict the NBA's annual All-Rookie Team selections. Previous studies have explored the use of machine learning methods to forecast specific game outcomes [1], forecast future NBA rosters [2], and even forecast which college players will perform best in the NBA [3]. However, our project intends to predict which players will be selected for the All-Rookie teams across the entire NBA through analyzing player statistics. By doing so, we contribute to the field of sports analytics and machine learning, offering insights into the NBA's prestigious end of season awards.
@@ -26,7 +28,7 @@ The dataset we are using for our project is a Kaggle dataset, with player stats 
 
 #### Data Cleaning
 
-Since our team was only concerned with the players selected for the All-Rookie team, we modified our data to only include players in their first year. We also removed any duplicate players (who would appear if they were traded during ther duration of the season) so they would not affect our results. Since rookies are traded less frequently, and a rookie who will be selected for the All-Rookie team is almost never traded, this had little effect on our dataset. To begin working on a model, our team decided to use the 2000-2021 seasons for training data, and the 2022 season for testing. To begin visualising our data, we plotted several key stats for the players in our training data, shown below. Using this visual data, our team was able to manually select the features that seemed most relevant for deciding which player would make the All-Rookie team. In blue are players who made the All-Rookie teams their rookie year, and in red are players that did not.
+Since our team was only concerned with the players selected for the All-Rookie team, we modified our data to only include players in their first year. We also removed any duplicate players (who would appear if they were traded during ther duration of the season) so they would not affect our results. Since rookies are traded less frequently, and a rookie who will be selected for the All-Rookie team is almost never traded, this had little effect on our dataset. To begin working on a model, our team decided to use the 2000-2021 seasons for training data, and the 2022 season for testing. To begin visualising our data, we plotted several key stats for the players in our training data, shown below. In blue are players who made the All-Rookie teams their rookie year, and in red are players that did not.
 
 
 ![Data](UnscaledStats.jpg)
@@ -54,7 +56,7 @@ In order to make predictions, our team decided to use a logistic regression mode
 
 The next model our team opted to use was k-Nearest Neighbors. We used the KNeighborsClassifier from sklearn to perform the classification. Again, we split training data into training and test splits, this time using 20% of the data for testing. The next step in the process was determining which value of k to use.
 
-To solve this problem, we trained several models on k's ranging from 1 to 39, then picked the k that resulted in the most accurate model. We found that k = 29 was optimal based on raw accuracy, but k=19 produced a better F1 score. We opted to use k=19 because our model should be able to classify all rookies (so precision and recall matter), but the model performs well even with fewer neighbors. Below is a graph comparing cross-validated F1 Scores across various k-values. 
+To solve this problem, we trained several models on k's ranging from 1 to 39, then picked the k that resulted in the most accurate model. We found that k = 29 was optimal based on raw accuracy, but k = 19 produced a better F1 score for the All-Rookie label. We opted to use k = 19 because our model should be able to classify all rookies, even though a high accuracy could be obtained by classifying all players as non-All-Rookies, since most players do not make the team. Below is a graph comparing cross-validated F1 Scores across various k-values. 
 
 ![Data](OptimalKValue.jpg)
 
@@ -62,7 +64,7 @@ To solve this problem, we trained several models on k's ranging from 1 to 39, th
 
 We also trained a Neural Network for this project. We used TensorFlow's Keras API to build a Neural Network with 2 leaky ReLU activation hidden layers and a Sigmoid activation output layer. We split the same training data set into training and test splits, and stuck with a 20% split for testing data. The next step was to determine the best hyperparameters for the model.
 
-After trying numerous combinations of neurons in each layer, batch size, and epochs, we found that 32 neurons in the first layer, 64 neurons in the second layer, 40 epochs, and a batch size of 64 produced the best F1 score of 77%.
+After trying numerous combinations of neurons in each layer, batch size, and epochs using grid search, we found that 32 neurons in the first layer, 64 neurons in the second layer, 40 epochs, and a batch size of 64 produced the best F1 score for the All-Rookie label. As with KNN, we decided to use this F1 score rather than accuracy due to the imbalanced nature of the dataset, and the need for our model to predict all-rookies.
 
 #### Gaussian Mixture Model
 
@@ -88,9 +90,19 @@ The below figure shows the confusion matrix for predictions made on the test dat
 
 The goal of our model was to be able to accurately predict the All-Rookie players for any given season, based on their current stats. After training our model, we used it to calculate the probabilites of each player for the 2022 season to make the All-Rookie team and then output the 10 most likely players. We used the model in this way because it is gauranteed that there will be 10 All-Rookie players each season. Below are the results for the logistic regression model.
 
-2022 Season All-Rookie Team: Cade Cunningham, Evan Mobley, Franz Wagner, Jalen Green, Scottie Barnes, Ayo Dosunmu, Bones Hyland, Chris Duarte, Herbert Jones, Josh Giddey
+| Player           | Probability |
+|------------------|-------------|
+| Evan Mobley      | 0.999978    |
+| Cade Cunningham  | 0.999905    |
+| Scottie Barnes   | 0.999825    |
+| Franz Wagner     | 0.998465    |
+| Herbert Jones    | 0.994351    |
+| Josh Giddey      | 0.994305    |
+| Davion Mitchell  | 0.992173    |
+| Alperen Şengün   | 0.992053    |
+| Jalen Green      | 0.986619    |
+| Ayo Dosunmu      | 0.961346    |
 
-2022 Season Predicted All-Rookie Team: Evan Mobley, Cade Cunningham, Scottie Barnes, Franz Wagner, Herbert Jones, Alperen Şengün, Jalen Green, Davion Mitchell, Josh Giddey, Ayo Dosunmu
 
 Incorrect Positive Predictions: Alperen Şengün, Davion Mitchell
 
@@ -99,7 +111,7 @@ Incorrect Negative Predictions: Bones Hyland, Chris Duarte
 Based on these results, the model was able to correctly identify 8 out of the 10 All-Rookies from the 2022 season.
 
 ### K-Nearest Neighbors
-Below we have a table showing performance measurements for our KNN model. Our KNN model performed better than expected! A precision score of 97% for class 1 means 97% of the players the model said would make the All-Rookie team made it, which is a better mark than our Logistic Regression Model. However, KNN struggled significantly with recall compared to LR, with only 71%. 
+Below we have a table showing performance measurements for our KNN model. Our KNN model performed better than expected! A precision score of 97% for class 1 means 97% of the players the model said would make the All-Rookie team made it, which is a better mark than our Logistic Regression Model. However, KNN struggled significantly with recall compared to Logistic Regression, with only 71%. 
 
 Accuracy: 95.8%
 
@@ -127,7 +139,7 @@ After training our model, we used it to calculate the probabilities of each 2022
 | Davion Mitchell |      0.8750     |
 |  Herbert Jones  |      0.8750     |
 |   Josh Giddey   |      0.8750     |
-|   Ayo Dosunmu   |      0.6875      |
+|   Ayo Dosunmu   |      0.6875     |
 
 Again, our model correctly identified 8 of the 10 All-Rookies from 2022 and actually predicted the same set of 10 players as our Logistic Regression Model.
 
@@ -179,7 +191,7 @@ GMM performed significantly worse than all three supervised models, posting an a
     <img src="ConfusionMatrixGMM.jpg" alt="Confusion Matrix">
 </div>
 
-Below are the clusters the model generated. In blue are the players it predicted to not make All-Rookie, and in red are the players it did. It appears that GMM has a hard time capturing exactly what makes a rookie as impactful as an All-Rookie member, and will particularly struggle with borderline players. 
+Below are the clusters the model generated. In blue are the players the model predicted to make All-Rookie, and in red are the players it did not. It appears that GMM has a hard time capturing exactly what makes a rookie as impactful as an All-Rookie member, and will particularly struggle with borderline players. 
 
 <div style="text-align:center;">
     <img src="GMMClusters.png" alt="Confusion Matrix">
@@ -201,7 +213,7 @@ Curiously, each model missed on 2 players: Bones Hyland and Chris Duarte, while 
 
 We can see that the voters had a difficult task when it came down to those last two spots! To see how close our model thought it was, we expanded each model until their predictions included all 10 correct members of the 2022 All-Rookie team. Each model had the entire team within their 13 most likely candidates. 
 
-## Conclusion
+## Conclusion and Next Steps
 
 Accurately predicting the results of human voting is a difficult task. In the world of sports, where criticism of players occurs nightly, it is hard for a model to recognize every storyline in the back of a voter's mind. In the end, we were able to train several models that sufficiently predicted All-Rookie winners. We set out hoping to achieve 80% accuracy with our models' predictions, and that's exactly what we did. 
 
@@ -219,14 +231,14 @@ Our models may serve as another tool in the sports analytics field, providing a 
 
 ## Gantt Chart
 ### NBA Award Predition | Project Timeline
-![Gantt Chart](GanttChartImage2.png)
+![Gantt Chart](GanttChartImage3.png)
 
 ## Contribution Table
 
 | Name              | Final Contributions                                   |
 |:------------------|:------------------------------------------------|
 | Matthew Brown     | Model Design and Selection <br/> Data Preprocessing <br/> Feature Reduction <br/> Data Visualization <br/> Model Implementation<br/> Proposal |
-| Rowan Chatterjee  | Model Design and Selection <br/> Data Preprocessing <br/> Data Visualization  <br/> Proposal     |
+| Rowan Chatterjee  | Model Design and Selection <br/> Data Preprocessing <br/> Data Visualization  <br/> Model Implementation<br/> Proposal     |
 | Wonjin Cho        | Model Design and Selection <br/> Data Preprocessing <br/>  Feature Reduction <br/> Video Presentation |
 | Clark Cousins     | Model Design and Selection <br/> Model Implementation <br/> Report <br/> Video Presentation |
 
