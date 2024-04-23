@@ -50,7 +50,7 @@ After scaling the training and testing data, we used the PCA (Principle Componen
 
 In order to make predictions, our team decided to use a logistic regression model for classification. We used the LogisticRegression class in sklearn to perform the classification. The model first splits the training data (2001 - 2021 seasons) into training and test data, with 30% of the data being used for testing. The data is inherently unbalanced between players selected for the All-Rookie team and those not selected since only 10 players are selected per season. To counter this, we added weights to the classes so the model would favor the All-Rookie class. We ran the model several times, and obtained the best results with weights of 1 for the not selected class and 3 for the All-Rookie class. In the model, 0 is used to represent a player not selected, and 1 is used for players that are selected.
 
-#### KNN
+#### K-Nearest Neighbors
 
 The next model our team opted to use was k-Nearest Neighbors. We used the KNeighborsClassifier from sklearn to perform the classification. Again, we split training data into training and test splits, this time using 20% of the data for testing. The next step in the process was determining which value of k to use.
 
@@ -58,13 +58,13 @@ To solve this problem, we trained several models on k's ranging from 1 to 39, th
 
 ![Data](OptimalKValue.jpg)
 
-#### NN
+#### Neural Network
 
 We also trained a Neural Network for this project. We used TensorFlow's Keras API to build a Neural Network with 2 leaky ReLU activation hidden layers and a Sigmoid activation output layer. We split the same training data set into training and test splits, and stuck with a 20% split for testing data. The next step was to determine the best hyperparameters for the model.
 
 After trying numerous combinations of neurons in each layer, batch size, and epochs, we found that 32 neurons in the first layer, 64 neurons in the second layer, 40 epochs, and a batch size of 64 produced the best F1 score of 77%.
 
-#### GMM
+#### Gaussian Mixture Model
 
 While we were building our other models, we became curious about how an unsupervised model would perform. Using the GaussianMixture class from sklearn, we trained a GMM model on the same data set of 310 players, with the same 20% split for testing data. The results were underwhelming, and we ended up not moving along with using the model to predict the 2022 All-Rookie class. 
 
@@ -98,7 +98,7 @@ Incorrect Negative Predictions: Bones Hyland, Chris Duarte
 
 Based on these results, the model was able to correctly identify 8 out of the 10 All-Rookies from the 2022 season.
 
-### KNN
+### K-Nearest Neighbors
 Below we have a table showing performance measurements for our KNN model. Our KNN model performed better than expected! A precision score of 97% for class 1 means 97% of the players the model said would make the All-Rookie team made it, which is a better mark than our Logisitic Regression Model. However, KNN struggled significantly with recall compared to LR, with only 71%. 
 
 Accuracy: 95.8%
@@ -135,7 +135,7 @@ Incorrect Positive Predicitons: Alperen Şengün, Davion Mitchell
 
 Incorrect Negative Predictions: Bones Hyland, Chris Duarte
 
-### NN
+### Neural Network
 Below we have a table showing performance measurements for our Neural Network model. Our NN performed rather similarly to our KNN model, with slightly worse precision but also slightly beter recall. All in all, the NN had a worse F1-score while classifying All-Rookie members.
 
 Accuracy: 94.7%, Loss: 10.2%
@@ -172,7 +172,7 @@ Incorrect Positive Predicitons: Alperen Şengün, Davion Mitchell
 
 Incorrect Negative Predictions: Bones Hyland, Chris Duarte
 
-## GMM 
+## Gaussian Mixture Model
 GMM performed significantly worse than all three supervised models, posting an accuracy of 75.8% on the testing data. For that reason, we ended up not using it to predict 2022 rookies. Below is the coinfusion matrix for the GMM clustering, and we can see that the model struggled significantly with players that did not win All-Rookie honors. 
 
 <div style="text-align:center;">
