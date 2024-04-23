@@ -52,6 +52,12 @@ In order to make predictions, our team decided to use a logistic regression mode
 
 #### KNN
 
+One problem we came across while training the model is determining an optimal value for $k$. To solve this problem, we trained several models on $k$'s ranging from 1 to 39, then picked the $k$ that resulted in the most accurate model. We found that $k$ = 29 was optimal based on raw accuracy, but $k$=19 produced a better F1 score. We opted to use $k$=19 because our model should be able to classify all rookies. Below is a graph comparing cross-validated F1 Scores across various $k$-values. Even with fewer neighbors, the model performs well.
+
+<div style="text-align:center;">
+   <img src="OptimalKValue.jpg" alt="Optimal K Values"
+</div>
+
 
 #### GMM
 
@@ -68,13 +74,13 @@ Accuracy: 0.97
 
 |    | Precision | Recall | F1-score | Support |
 |----|-----------|--------|----------|---------|
-| 0  |   0.99    |  0.98  |   0.99   |   242   |
-| 1  |   0.86    |  0.97  |   0.91   |    32   |
+| 0  |   0.99    |  0.98  |   0.98   |   268   |
+| 1  |   0.87    |  0.93  |   0.90   |    42   |
 
-The below figure shows the confusion matrix for predictions made on the test data. Of the 274 players in the testing data, there were 242 players who were not selected for the All-Rookie team and 32 players who were. The logistic regression model correctly identified 11 All-Rookies, and was not able to identify 1 All-Rookie. Then model correctly identified 237 of the non-All-Rookie players, and misidentified 5 non-All-Rookie players as All-Rookie.
+The below figure shows the confusion matrix for predictions made on the test data. Of the 274 players in the testing data, there were 268 players who were not selected for the All-Rookie team and 42 players who were. The logistic regression model correctly identified 39 All-Rookies, and was not able to identify 3 All-Rookie. Then model correctly identified 262 of the non-All-Rookie players, and misidentified 6 non-All-Rookie players as All-Rookie.
 
 <div style="text-align:center;">
-    <img src="ConfusionMatrix.jpg" alt="Confusion Matrix">
+    <img src="ConfusionMatrixLogRed.jpg" alt="Confusion Matrix">
 </div>
 
 The goal of our model was to be able to accurately predict the All-Rookie players for any given season, based on their current stats. After training our model, we used it to calculate the probabilites of each player for the 2022 season to make the All-Rookie team and then output the 10 most likely players. We used the model in this way because it is gauranteed that there will be 10 All-Rookie players each season. Below are the results for the logistic regression model.
@@ -90,12 +96,53 @@ Incorrect Negative Predictions: Bones Hyland, Chris Duarte
 Based on these results, the model was able to correctly identify 8 out of the 10 All-Rookies from the 2022 season.
 
 ### KNN
+Below we have a table showing performance measurements for our KNN model. Our KNN model performed better than expected! A precision score of 97% for class 1 means 97% of the players the model said would make the All-Rookie team made it, which is a better mark than our Logisitic Regression Model. However, KNN struggled significantly with recall compared to LR, with only 71%. 
 
+Accuracy: 95.8%
 
+|    | Precision | Recall | F1-score | Support |
+|----|-----------|--------|----------|---------|
+| 0  |   0.96    |  1.00  |   0.98   |   268   |
+| 1  |   1.00    |  0.74  |   0.85   |    42   |
+
+The below figure shows the confusion matrix for predictions made on the test data of 310 players. The model correctly characterized all 268 non All-Rookie members as such, and therefore did not incorrectly predict any non All-Rookie members to take home the award. It did, however, predict 11 players that would make the All-Rookie to not do so. It correctly predicted 31 All-Rookie members. 
+
+<div style="text-align:center;">
+    <img src="ConfusionMatrixKNN.jpg" alt="Confusion Matrix">
+</div>
+
+After training our model, we used it to calculate the probabilities of each 2022 rookie to make the All-Rookie team and ouput the 10 most likely players. Here are the 10 most likely players, according to the model, and their associated probabilities.
+
+|      player     |   probability   | 
+| ----------------|-----------------|
+| Cade Cunningham |      1.00       |
+|   Evan Mobley   |      1.00       |
+|   Jalen Green   |      1.00       |
+|  Scottie Barnes |      1.00       | 
+|   Franz Wagner  |      0.9375     |
+|  Alperen Şengün |      0.8750     |
+| Davion Mitchell |      0.8750     |
+|  Herbert Jones  |      0.8750     |
+|   Josh Giddey   |      0.8750     |
+|   Ayo Dosunmu   |      0.6875      |
+
+Again, our model correctly idenitified 8 of the 10 All-Rookies from 2022, and actually predicted the same set of 10 players as our Logistic Regression Model.
+
+Incorrect Positive Predicitons: Alperen Şengün, Davion Mitchell
+
+Incorrect Negative Predictions: Bones Hyland, Chris Duarte
 ### GMM
 
 
 ### NN
+Below we have a table showing performance measurements for our Neural Network model. Our NN performed rather similarly to our KNN model, with slightly worse precision but also slightly beter recall. All in all, the NN had a worse F1-score while classifying All-Rookie members.
+
+Accuracy: 94.7%, Loss: 10.2%
+
+|    | Precision | Recall | F1-score | Support |
+|----|-----------|--------|----------|---------|
+| 0  |   0.96    |  0.99 |   0.98   |   268   |
+| 1  |   0.91    |  0.76  |   0.83   |    42   |
 
 
 
@@ -109,8 +156,8 @@ Based on these results, the model was able to correctly identify 8 out of the 10
 |:------------------|:------------------------------------------------|
 | Matthew Brown     | Model Design and Selection <br/> Data Preprocessing <br/> Feature Reduction <br/> Data Visualization <br/> Model Implementation<br/> Proposal |
 | Rowan Chatterjee  | Model Design and Selection <br/> Data Preprocessing <br/> Data Visualization  <br/> Proposal     |
-| Wonjin Cho        | Model Design and Selection <br/> Data Preprocessing <br/>  Feature Reduction |
-| Clark Cousins     | Model Design and Selection <br/> Model Implementation                     |
+| Wonjin Cho        | Model Design and Selection <br/> Data Preprocessing <br/>  Feature Reduction | <br/> Video Presentation |
+| Clark Cousins     | Model Design and Selection <br/> Model Implementation <br/> Report |
 
 ## References
 
