@@ -8,7 +8,7 @@ description: Matthew Brown, Rowan Chatterjee, Wonjin Cho, Clark Cousins
 
 ## Introduction/Background
 
-This project will predict the NBA's annual MVP and DPOY awards, as well as the All-NBA and All-Defensive Team selections. Previous studies have explored the use of machine learning methods to forecast specific game outcomes [1], forecast future NBA rosters [2], and even forecast which college players will perform best in the NBA [3]. However, our project intends to predict which players will be selected for the All-Rookie  across the entire NBA through analyzing player statistics and team performances. By doing so, we contribute to the field of sports analytics and machine learning, offering insights into the NBA's prestigious end of season awards.
+This project will predict the NBA's annual All-Rookie Team selections. Previous studies have explored the use of machine learning methods to forecast specific game outcomes [1], forecast future NBA rosters [2], and even forecast which college players will perform best in the NBA [3]. However, our project intends to predict which players will be selected for the All-Rookie teams across the entire NBA through analyzing player statistics. By doing so, we contribute to the field of sports analytics and machine learning, offering insights into the NBA's prestigious end of season awards.
 
 In order to achieve this, we will need a dataset of player and team stats from previous NBA seasons, and the winners of the awards at the end of those seasons. We will use a [Kaggle NBA dataset](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats/data), which encompasses detailed regular-season statistics of NBA players since the 1940s. This dataset includes player statistics such as points per game, rebounds, assists, steals, blocks, and yearly team records.
 
@@ -26,20 +26,20 @@ The dataset we are using for our project is a Kaggle dataset, with player stats 
 
 #### Data Cleaning
 
-Since our team was only concerned with the players selected for the All-Rookie team, we modified our data to only include players in their first year. We also removed any duplicate players (who would appear if they were traded during ther duration of the season) so they would not affect our results. Since rookies are traded less frequently, and a rookie who will be selected for the All-Rookie team is almost never traded, this had little affect on our dataset. To begin working on a model, our team decided to use the 2000-2021 season for training data, and the 2022 season for testing. To begin visualising our data, we plotted several key stats for the players in our training data, shown below. Using this visual data, our team was able to manually select the features that seemed most relevant for deciding which player would make the All-Rookie team.
+Since our team was only concerned with the players selected for the All-Rookie team, we modified our data to only include players in their first year. We also removed any duplicate players (who would appear if they were traded during ther duration of the season) so they would not affect our results. Since rookies are traded less frequently, and a rookie who will be selected for the All-Rookie team is almost never traded, this had little effect on our dataset. To begin working on a model, our team decided to use the 2000-2021 seasons for training data, and the 2022 season for testing. To begin visualising our data, we plotted several key stats for the players in our training data, shown below. Using this visual data, our team was able to manually select the features that seemed most relevant for deciding which player would make the All-Rookie team. In blue are players who made the All-Rookie teams their rookie year, and in red are players that did not.
 
 
 ![Data](UnscaledStats.jpg)
 
 #### Standard Scalar
 
-Before performing PCA, we scaled our data using the StandardScalar library in sklearn to take into account the difference in player performance across different seasons. The averages for certain stats like points per game have gone up through the years, so in order to account for this we normalized the data. The scaled data is shown in the plot below. 
+Before performing PCA, we scaled our data using the StandardScalar library in sklearn to take into account the difference in player performance across different seasons. The averages for certain stats like points per game have gone up through the years, so in order to account for this we normalized the data. The scaled data is shown in the plot below. In blue are players who made the All-Rookie teams their rookie year, and in red are players that did not.
 
 ![Data](ScaledStats.jpg)
 
 #### PCA
 
-After scaling the training and testing data, we used the PCA (Principle Component Analysis) class in sklearn to reduce the dimensionality of our data. Using PCA, we obtained the 4 principle components that would retain 95% of the variance in our data. The first 3 principle components are shown below. As can be seen in the plot, there is a large amount of separation between most of the players selected for the All-Rookie team and those not selected.
+After scaling the training and testing data, we used the PCA (Principle Component Analysis) class in sklearn to reduce the dimensionality of our data. Using PCA, we obtained the 4 principle components that would retain 95% of the variance in our data. The first 3 principle components are shown below. As can be seen in the plot, there is a large amount of separation between most of the players selected for the All-Rookie team and those not selected. In blue are players who made the All-Rookie teams their rookie year, and in red are players that did not.
 
 ![Data](PCAData.jpg)
 
@@ -186,8 +186,9 @@ Below are the clusters the model generated. In blue are the players it predicted
 </div>
 
 ## Discussion
-Our models performed rather well. When we set out on this project, we set goals of an Accuracy score greater than 80%, Precision and Recall both greather than 75%, and an F1 Score greater than 75%. All of our models achieved that mark, reaching 80% accuracy for all 2022 All-Rookie predictions. Of the three models we trained to predict results, Logistic Regression performed the best, putting up the highest F1-Score while predicting awards of 90% and a recall of 93%. The Neural Network performed the worst, posting an F1-Score of 83% and a recall of 76%. We believe this to be a result of the more linear nature of the data. As a trend, we found that players who score more points while playing more games ended up being awarded with All-Rookie honors. It's likely that LR captured that relationship very well.
+Our models performed rather well. When we set out on this project, we set goals of an Accuracy score greater than 80%, Precision and Recall both greather than 75%, and an F1 Score greater than 75%. All of our models achieved that mark, reaching 80% accuracy for all 2022 All-Rookie predictions. Of the three models we trained to predict results, Logistic Regression performed the best, putting up the highest F1-Score while predicting awards of 90% and a recall of 93%. The Neural Network performed the worst, posting an F1-Score of 83% and a recall of 76%. KNN sat in the middle, with an F1 Score of 85% and a recall of 74%. 
 
+Logistic Regression likely succeeded due to a variety of reasons. The weightings given to the data before training allowed the model to navigate a data set with relatively few All-Rookie winners. Other models were not able to capture this. Another reason is the more linear nature of the relationship between statistics and rookie awards. As a trend, we found that players who score more points while playing more games ended up being awarded with All-Rookie honors. It's likely that LR handled that relationship very well. As a whole, all models struggled on picking "borderline" players. 
 
 Curiously, each model missed on 2 players: Bones Hyland and Chris Duarte, while incorrectly predicting Alperen Şengün and Davion Mitchell to take All-Rookie honors. Below are their stats for their 2022 rookie campaigns.
 
@@ -199,6 +200,16 @@ Curiously, each model missed on 2 players: Bones Hyland and Chris Duarte, while 
 | Bones Hyland | 69 | 10.1 | 2.8 | 2.7 | 0.3 | 0.6 | 40.3 |
 
 We can see that the voters had a difficult task when it came down to those last two spots! To see how close our model thought it was, we expanded each model until their predictions included all 10 correct members of the 2022 All-Rookie team. Each model had the entire team within their 13 most likely candidates. 
+
+## Conclusion
+
+Accurately predicting the results of human voting is a difficult task. In the world of sports, where criticism of players occurs nightly, it is hard for a model to recognize every storyline in the back of a voter's mind. In the end, we were able to train several models that sufficiently predicted All-Rookie winners. We set out hoping to achieve 80% accuracy with our models' predictions, and that's exactly what we did. 
+
+Some future work in this space could be the introduction of team data. One thing each of our models fail to capture are the non-statistic impacts each player has. For example, though Bones Hyland's season averages appear to be worse than Davion Mitchell's, Bones' impact in the second half of the season and playoffs likely led to his selection for the team. A model that could take team success into account could produce more accurate results, especially if that model was able to track year-to-year changes in team success. To use an example from these past two years: During the 2022-2023 season, the San Antonio Spurs were the worst team in basketball, having a league-worst Offensive and Defensive Rating. With the first pick in the NBA Draft that offseason, they selected Victor Wembanayama, who would develop into a superstar within his first year in the league. The Spurs climbed the rankings in both Offensive and Defensive Rating, and added 6 expected wins, despite Wembanyama being the only significant roster change. 
+
+Our models may serve as another tool in the sports analytics field, providing a low-stakes estimate of what rookies are performing best any given season. 
+
+
 
 
 
