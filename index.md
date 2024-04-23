@@ -228,7 +228,7 @@ Our models may serve as another tool in the sports analytics field, providing a 
 | Matthew Brown     | Model Design and Selection <br/> Data Preprocessing <br/> Feature Reduction <br/> Data Visualization <br/> Model Implementation<br/> Proposal |
 | Rowan Chatterjee  | Model Design and Selection <br/> Data Preprocessing <br/> Data Visualization  <br/> Proposal     |
 | Wonjin Cho        | Model Design and Selection <br/> Data Preprocessing <br/>  Feature Reduction <br/> Video Presentation |
-| Clark Cousins     | Model Design and Selection <br/> Model Implementation <br/> Report |
+| Clark Cousins     | Model Design and Selection <br/> Model Implementation <br/> Report <br/> Video Presentation |
 
 ## References
 
