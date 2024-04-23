@@ -52,23 +52,28 @@ In order to make predictions, our team decided to use a logistic regression mode
 
 #### KNN
 
-One problem we came across while training the model is determining an optimal value for k. To solve this problem, we trained several models on k's ranging from 1 to 39, then picked the k that resulted in the most accurate model. We found that k = 29 was optimal based on raw accuracy, but k=19 produced a better F1 score. We opted to use k=19 because our model should be able to classify all rookies. Below is a graph comparing cross-validated F1 Scores across various k-values. Even with fewer neighbors, the model performs well.
+The next model our team opted to use was k-Nearest Neighbors. We used the KNeighborsClassifier from sklearn to perform the classification. Again, we split training data into training and test splits, this time using 20% of the data for testing. The next step in the process was determining which value of k to use.
+
+To solve this problem, we trained several models on k's ranging from 1 to 39, then picked the k that resulted in the most accurate model. We found that k = 29 was optimal based on raw accuracy, but k=19 produced a better F1 score. We opted to use k=19 because our model should be able to classify all rookies (so precision and recall matter), but the model performs well even with fewer neighbors. Below is a graph comparing cross-validated F1 Scores across various k-values. 
 
 ![Data](OptimalKValue.jpg)
 
+#### NN
+
+We also trained a Neural Network for this project. We used TensorFlow's Keras API to build a Neural Network with 2 leaky ReLU activation hidden layers and a Sigmoid activation output layer. We split the same training data set into training and test splits, and stuck with a 20% split for testing data. The next step was to determine the best hyperparameters for the model.
+
+After trying numerous combinations of neurons in each layer, batch size, and epochs, we found that 32 neurons in the first layer, 64 neurons in the second layer, 40 epochs, and a batch size of 64 produced the best F1 score of 77%.
 
 #### GMM
 
-
-#### NN
-
+While we were building our other models, we became curious about how an unsupervised model would perform. Using the GaussianMixture class from sklearn, we trained a GMM model on the same data set of 310 players, with the same 20% split for testing data. The results were underwhelming, and we ended up not moving along with using the model to predict the 2022 All-Rookie class. 
 
 ## Results
 
 ### Logistic Regression
 Below is a table showing several measurements of our model's performance. Our model using logistic regression performed much better than we initially expected. Most notable of these metrics is the 0.86 precision for the class 1. This means that 86% of players predicted to make the All-Rookie team did make the team. Additionally, based on the recall for class 1 the model correctly identifies 97% of All-Rookie players. Note that these are the results for a model trained on a random split of the data into a training set and a testing set, and they can change slightly depending on how the data is divided.
 
-Accuracy: 0.97
+Accuracy: 97%
 
 |    | Precision | Recall | F1-score | Support |
 |----|-----------|--------|----------|---------|
@@ -129,8 +134,6 @@ Again, our model correctly idenitified 8 of the 10 All-Rookies from 2022, and ac
 Incorrect Positive Predicitons: Alperen Şengün, Davion Mitchell
 
 Incorrect Negative Predictions: Bones Hyland, Chris Duarte
-### GMM
-
 
 ### NN
 Below we have a table showing performance measurements for our Neural Network model. Our NN performed rather similarly to our KNN model, with slightly worse precision but also slightly beter recall. All in all, the NN had a worse F1-score while classifying All-Rookie members.
@@ -142,6 +145,65 @@ Accuracy: 94.7%, Loss: 10.2%
 | 0  |   0.96    |  0.99 |   0.98   |   268   |
 | 1  |   0.91    |  0.76  |   0.83   |    42   |
 
+We also generated the confusion matrix for the NN, and have displayed it below. Over the same data set of 310 players, our NN correctly classified 265 of the 268 players that did not make All Rookie, incorrectly predicting 3 players that did not make all-Rookie to do so. It correctly labelled 32 players as All-Rookie members, but labelled 10 players that did not make the All-Rookie team to do so.
+
+<div style="text-align:center;">
+    <img src="ConfusionMatrixNN.jpg" alt="Confusion Matrix">
+</div>
+
+We used a similar methodology as LR and KNN to generate the 10 most likely members of the 2022 All-Rookie team, and here are the results the model gave:
+
+|      player     |   probability   | 
+| ----------------|-----------------|
+| Evan Mobley     |     0.999         |
+| Cade Cunningham |      0.998       |
+|   Scottie Barnes   |      0.997       |
+|  Franz Wagner |      0.988       | 
+|   Herbert Jones  |      0.988     |
+|  Alperen Şengün |      0.979     |
+| Josh Giddey     |      0.974     |
+|  Jalen Green    |      0.966     |
+|   Davion Mitchell   |      0.964     |
+|   Ayo Dosunmu   |      0.899      |
+
+Our model predicted the same set of rookies as our Logisitic Regression and K-Nearest Neighbor models, which means it scored an 80% for accuracy for this predicion. It presented the team in a slightly different ordering of probabilities compared the the previous models. 
+
+Incorrect Positive Predicitons: Alperen Şengün, Davion Mitchell
+
+Incorrect Negative Predictions: Bones Hyland, Chris Duarte
+
+## GMM 
+GMM performed significantly worse than all three supervised models, posting an accuracy of 75.8% on the testing data. For that reason, we ended up not using it to predict 2022 rookies. Below is the coinfusion matrix for the GMM clustering, and we can see that the model struggled significantly with players that did not win All-Rookie honors. 
+
+<div style="text-align:center;">
+    <img src="ConfusionMatrixGMM.jpg" alt="Confusion Matrix">
+</div>
+
+Below are the clusters the model generated. In blue are the players it predicted to not make All-Rookie, and in red are the palyers it did. It appears that GMM has a hard time capturing exactly what makes a rookie as impactful as an All-Rookie member, and will particularly struggle with borderline players. 
+
+<div style="text-align:center;">
+    <img src="GMMClusters.png" alt="Confusion Matrix">
+</div>
+
+## Discussion
+Our models performed rather well. When we set out on this project, we set goals of an Accuracy score greater than 80%, Precision and Recall both greather than 75%, and an F1 Score greater than 75%. All of our models achieved that mark, reaching 80% accuracy for all 2022 All-Rookie predictions. Of the three models we trained to predict results, Logistic Regression performed the best, putting up the highest F1-Score while predicting awards of 90% and a recall of 93%. The Neural Network performed the worst, posting an F1-Score of 83% and a recall of 76%. We believe this to be a result of the more linear nature of the data. As a trend, we found that players who score more points while playing more games ended up being awarded with All-Rookie honors. It's likely that LR captured that relationship very well.
+
+
+Curiously, each model missed on 2 players: Bones Hyland and Chris Duarte, while incorrectly predicting Alperen Şengün and Davion Mitchell to take All-Rookie honors. Below are their stats for their 2022 rookie campaigns.
+
+| player | games | PPG | APG | RPG | BPG | SPG | FG% | 
+|---------|-------|-----|-----|----|-----|----|----|
+| Alperen Şengün | 72 | 9.6 | 2.6 | 5.5 | 0.9 | 0.8 | 47.4 |
+| Davion Mitchell | 75 | 11.5 | 4.2 | 2.2 | 0.3 | 0.7 | 41.8 |
+| Chris Duarte | 55 | 13.1 | 2.1 | 4.1 | 0.2 | 1.0 | 43.2 |
+| Bones Hyland | 69 | 10.1 | 2.8 | 2.7 | 0.3 | 0.6 | 40.3 |
+
+We can see that the voters had a difficult task when it came down to those last two spots! To see how close our model thought it was, we expanded each model until their predictions included all 10 correct members of the 2022 All-Rookie team. Each model had the entire team within their 13 most likely candidates. 
+
+
+
+
+
 
 
 ## Gantt Chart
@@ -150,7 +212,7 @@ Accuracy: 94.7%, Loss: 10.2%
 
 ## Contribution Table
 
-| Name              | Contributions                                   |
+| Name              | Final Contributions                                   |
 |:------------------|:------------------------------------------------|
 | Matthew Brown     | Model Design and Selection <br/> Data Preprocessing <br/> Feature Reduction <br/> Data Visualization <br/> Model Implementation<br/> Proposal |
 | Rowan Chatterjee  | Model Design and Selection <br/> Data Preprocessing <br/> Data Visualization  <br/> Proposal     |
